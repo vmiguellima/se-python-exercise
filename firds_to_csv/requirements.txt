@@ -1,0 +1,5 @@
+requests
+pytest
+datetime
+typing
+pandas
