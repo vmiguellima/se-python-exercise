@@ -1,7 +1,7 @@
 import json
 import datetime
 from typing import Union
-import requests
+# import requests
 # import pandas as pd
 
 def lambda_handler(event, context):
@@ -52,14 +52,16 @@ def lambda_handler(event, context):
         # upadte new url
         url = source_url(query, from_date, to_date)
 
-    xml = get_firsts_xml_from_url(url)
+    # xml = get_firsts_xml_from_url(url)
+
+    # pd.read_xml(xml)
 
     return response({
             "message": "hello world",
             # "query": event["queryStringParameters"].get('q', ''),
             # "from": from_date,
             'url': url,
-            "xml": xml,
+            # "xml": xml,
             # "columns": json(df.columns)
             # 'parameters': query_parameters
             # "xml": get_firsts_xml_from_url(url)
@@ -95,18 +97,18 @@ def validate_date_format(date_text: str, format: str = '%Y-%m-%d'):
     except ValueError:
         raise ValueError("Incorrect date format, should be YYYY-MM-DD")
 
-def get_firsts_xml_from_url(url: str) -> str:
-    """It gets xml from a given url
+# def get_firsts_xml_from_url(url: str) -> str:
+#     """It gets xml from a given url
 
-    Args:
-        url (str): url with xml
+#     Args:
+#         url (str): url with xml
 
-    Returns:
-        str: xml as text
-    """
-    response = requests.get(url)
+#     Returns:
+#         str: xml as text
+#     """
+#     response = requests.get(url)
 
-    return response.text;
+#     return response.text;
 
 def response(data: Union[str, dict], status_code: int = '200') -> dict:
     """Builds a body response

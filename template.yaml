@@ -8,33 +8,26 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 5
+    Timeout: 3
+    Tracing: Active
+  Api:
+    TracingEnabled: True
 
 Resources:
-  FirdsToCsvFunction:
+  HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: firds_to_csv/
       Handler: app.lambda_handler
-      Runtime: python3.8  # update also in .github/workflows/sam-pipeline.yml
-      Timeout: 120
-      MemorySize: 512
+      Runtime: python3.9
+      Architectures:
+        - x86_64
       Events:
-        FirdsToCsv:
+        HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /firds
             Method: get
-          RequestParameters:
-            - method.request.querystring.q:
-                Required: false
-                Caching: false
-            - method.request.querystring.from:
-                Required: false
-                Caching: false
-            - method.request.querystring.to:
-                Required: false
-                Caching: false
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
