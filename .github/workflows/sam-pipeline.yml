@@ -8,10 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
-          with:
-            python-version: "3.8"
-          run: |
-            pip3 install pytest
+        with:
+          python-version: "3.8"
+      - name: Install Pip Dependencies for CI
+        run: |
+          pip3 install pytest
       - uses: aws-actions/setup-sam@v2
       - uses: aws-actions/configure-aws-credentials@v1
         with:
