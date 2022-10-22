@@ -1,0 +1,13 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "se-firds-app"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1t8ceoxs1k7gn"
+s3_prefix = "se-firds-app"
+region = "us-east-2"
+profile = "default"
+confirm_changeset = false
+fail_on_empty_changeset = false
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
