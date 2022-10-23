@@ -12,7 +12,7 @@ from xml.dom import minidom
 import boto3
 
 s3 = boto3.client('s3')
-bucket = 'aws-sam-cli-managed-default-samclisourcebucket-1t8ceoxs1k7gn'
+bucket = 'se-firds'
 
 def lambda_handler(event, context):
     """Sample pure Lambda function
