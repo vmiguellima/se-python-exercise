@@ -8,6 +8,7 @@ from urllib.request import urlopen
 import xml.etree.ElementTree as et
 
 bucket = 'aws-sam-cli-managed-default-samclisourcebucket-1t8ceoxs1k7gn'
+namespace = '{urn:iso:std:iso:20022:tech:xsd:auth.036.001.02}'
 
 def lambda_handler(event, context):
     """Sample pure Lambda function
@@ -119,11 +120,27 @@ def validate_date_format(date_text: str, format: str = '%Y-%m-%d'):
         raise ValueError("Incorrect date format, should be YYYY-MM-DD")
 
 def get_zips_from_url(url: str) -> list:
+    """Get zips urls from a url
+
+    Args:
+        url (str): the url query
+
+    Returns:
+        list: zips urls in a list
+    """
     df = pd.read_xml(url, xpath="//doc[str[@name = 'file_type'][normalize-space(text()) = 'DLTINS']]/str[@name = 'download_link']")
 
     return df['str'].tolist()
 
 def parse_firds(filename):
+    """Iterate over a file using iterparse, to reduce memory usage
+
+    Args:
+        filename (_type_): the file path
+
+    Yields:
+        _type_: so it is only iterated once
+    """
     stack = []
 
     for event, elem in et.iterparse(filename, events=('start','end')):
@@ -151,10 +168,26 @@ def parse_firds(filename):
             stack.pop()
 
 def tag(name: str) -> str:
-    return '{urn:iso:std:iso:20022:tech:xsd:auth.036.001.02}' + name.strip()
+    """Returns a a complete xml tag with the appropriate namespace
+
+    Args:
+        name (str): Tag name
+
+    Returns:
+        str: namespace + tag
+    """
+    return namespace + name.strip()
 
 def clean_tag(name: str) -> str:
-    cleaned = name.strip().replace('{urn:iso:std:iso:20022:tech:xsd:auth.036.001.02}', '')
+    """Remove namespace from tag name
+
+    Args:
+        name (str): complete namespace
+
+    Returns:
+        str: tag name
+    """
+    cleaned = name.strip().replace(namespace, '')
 
     if cleaned == 'Issr':
         return cleaned;
