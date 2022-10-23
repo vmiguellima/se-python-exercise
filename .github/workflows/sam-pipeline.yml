@@ -12,7 +12,7 @@ jobs:
           python-version: "3.8" # update also in template.yaml->Runtime
       - name: Install Pip Dependencies for CI
         run: |
-          pip3 install pytest
+          pip3 install pytest pandas requests lxml fsspec s3fs boto3
       - uses: aws-actions/setup-sam@v2
       - uses: aws-actions/configure-aws-credentials@v1
         with:
