@@ -6,7 +6,17 @@ Steel eye test excercise
 - Continuos Integration using Github to AWS lamba
 - Get zip and extract xml
 - Parse xml to csv
-- Save dataframe to s3
+- Save csv to s3
+- Document using pydocs
+
+## Tools
+- pandas
+- pytest
+- pydoc
+- aws
+    - lambda
+    - sam
+    - s3
 
 ## Create custom python layer
 
