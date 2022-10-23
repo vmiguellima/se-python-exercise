@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module app</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>app</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/miguel/code/se-exercise/firds_to_csv/app.py">/Users/miguel/code/se-exercise/firds_to_csv/app.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-clean_tag"><strong>clean_tag</strong></a>(name: str) -&gt; str</dt><dd><tt>Remove&nbsp;namespace&nbsp;from&nbsp;tag&nbsp;name<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;(str):&nbsp;complete&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;tag&nbsp;name</tt></dd></dl>
+ <dl><dt><a name="-get_zips_from_url"><strong>get_zips_from_url</strong></a>(url: str) -&gt; list</dt><dd><tt>Get&nbsp;zips&nbsp;urls&nbsp;from&nbsp;a&nbsp;url<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;(str):&nbsp;the&nbsp;url&nbsp;query<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list:&nbsp;zips&nbsp;urls&nbsp;in&nbsp;a&nbsp;list</tt></dd></dl>
+ <dl><dt><a name="-lambda_handler"><strong>lambda_handler</strong></a>(event, context)</dt><dd><tt>Sample&nbsp;pure&nbsp;Lambda&nbsp;function<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+event:&nbsp;dict,&nbsp;required<br>
+&nbsp;&nbsp;&nbsp;&nbsp;API&nbsp;Gateway&nbsp;Lambda&nbsp;Proxy&nbsp;Input&nbsp;Format<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Event&nbsp;doc:&nbsp;https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format<br>
+&nbsp;<br>
+context:&nbsp;object,&nbsp;required<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lambda&nbsp;Context&nbsp;runtime&nbsp;methods&nbsp;and&nbsp;attributes<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Context&nbsp;doc:&nbsp;https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html<br>
+&nbsp;<br>
+Returns<br>
+------<br>
+API&nbsp;Gateway&nbsp;Lambda&nbsp;Proxy&nbsp;Output&nbsp;Format:&nbsp;dict<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;doc:&nbsp;https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html</tt></dd></dl>
+ <dl><dt><a name="-parse_firds"><strong>parse_firds</strong></a>(filename)</dt><dd><tt>Iterate&nbsp;over&nbsp;a&nbsp;file&nbsp;using&nbsp;iterparse,&nbsp;to&nbsp;reduce&nbsp;memory&nbsp;usage<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;(_type_):&nbsp;the&nbsp;file&nbsp;path<br>
+&nbsp;<br>
+Yields:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;_type_:&nbsp;so&nbsp;it&nbsp;is&nbsp;only&nbsp;iterated&nbsp;once</tt></dd></dl>
+ <dl><dt><a name="-response"><strong>response</strong></a>(data: Union[str, dict], status_code: int = '200') -&gt; dict</dt><dd><tt>Builds&nbsp;a&nbsp;body&nbsp;response<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict&nbsp;|&nbsp;str):&nbsp;the&nbsp;data/message&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status_code&nbsp;(int,&nbsp;optional):&nbsp;response&nbsp;status&nbsp;code.&nbsp;Defaults&nbsp;to&nbsp;'200'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;a&nbsp;structured&nbsp;response&nbsp;body</tt></dd></dl>
+ <dl><dt><a name="-source_url"><strong>source_url</strong></a>(query: str = '*', date_from: str = '2021-01-17', date_to: str = '2021-01-19') -&gt; str</dt><dd><tt>Get&nbsp;firds&nbsp;source&nbsp;url<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;query&nbsp;(str,&nbsp;optional):&nbsp;The&nbsp;query&nbsp;string&nbsp;must&nbsp;be&nbsp;compatible&nbsp;with&nbsp;firds&nbsp;guidelines.&nbsp;Defaults&nbsp;to&nbsp;'*'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;date_from&nbsp;(str,&nbsp;optional):&nbsp;Query&nbsp;data&nbsp;from&nbsp;a&nbsp;given&nbsp;date,&nbsp;format&nbsp;YYYY-mm-dd.&nbsp;Defaults&nbsp;to&nbsp;'2021-01-17'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;date_to&nbsp;(str,&nbsp;optional):&nbsp;Query&nbsp;data&nbsp;to&nbsp;a&nbsp;given&nbsp;date,&nbsp;format&nbsp;YYYY-mm-dd.&nbsp;Defaults&nbsp;to&nbsp;'2021-01-19'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;The&nbsp;url&nbsp;to&nbsp;get&nbsp;the&nbsp;xml&nbsp;firds&nbsp;data</tt></dd></dl>
+ <dl><dt><a name="-tag"><strong>tag</strong></a>(name: str) -&gt; str</dt><dd><tt>Returns&nbsp;a&nbsp;a&nbsp;complete&nbsp;xml&nbsp;tag&nbsp;with&nbsp;the&nbsp;appropriate&nbsp;namespace<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;(str):&nbsp;Tag&nbsp;name<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;namespace&nbsp;+&nbsp;tag</tt></dd></dl>
+ <dl><dt><a name="-validate_date_format"><strong>validate_date_format</strong></a>(date_text: str, format: str = '%Y-%m-%d')</dt><dd><tt>Validate&nbsp;date&nbsp;is&nbsp;in&nbsp;the&nbsp;correct&nbsp;formate<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;date_text&nbsp;(str):&nbsp;date&nbsp;to&nbsp;be&nbsp;validated<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;if&nbsp;date&nbsp;is&nbsp;not&nbsp;in&nbsp;the&nbsp;correct&nbsp;format</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Union</strong> = typing.Union<br>
+<strong>bucket</strong> = 'aws-sam-cli-managed-default-samclisourcebucket-1t8ceoxs1k7gn'<br>
+<strong>namespace</strong> = '{urn:iso:std:iso:20022:tech:xsd:auth.036.001.02}'</td></tr></table>
+</body></html>
