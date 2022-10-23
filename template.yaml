@@ -6,20 +6,22 @@ Description: >
   Template for se-firds-app
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
-Globals:
-  Function:
-    Timeout: 3
-    Tracing: Active
-  Api:
-    TracingEnabled: True
+# Globals:
+#   Function:
+#     Timeout: 10
+#     Tracing: Active
+#   Api:
+#     TracingEnabled: True
 
 Resources:
-  HelloWorldFunction:
+  FirdsToCsvFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: firds_to_csv/
       Handler: app.lambda_handler
-      Runtime: python3.9
+      Runtime: python3.8
+      Timeout: 600
+      MemorySize: 1024
       Architectures:
         - x86_64
       Events:
@@ -28,6 +30,18 @@ Resources:
           Properties:
             Path: /firds
             Method: get
+  #     Layers:
+  #       # - arn:aws:lambda:us-east-2:357343029151:layer:steel-eye-layer:2
+  #       - !Ref libs
+
+  # libs:
+  #   Type: AWS::Serverless::LayerVersion
+  #   Properties:
+  #     LayerName: steel-eye-layer
+  #     Description: Dependencies for the blank-python sample app.
+  #     ContentUri: pandas.zip
+  #     CompatibleRuntimes:
+  #       - python3.8
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

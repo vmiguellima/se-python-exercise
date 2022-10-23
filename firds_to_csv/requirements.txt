@@ -1,5 +1,6 @@
 requests
-pytest
-datetime
-typing
 pandas
+lxml
+fsspec
+s3fs
+boto3
