@@ -1,18 +1,13 @@
 import json
 import datetime
 import pandas as pd
-# import requests
 from typing import Union
 from io import BytesIO
 from zipfile import ZipFile
 from urllib.request import urlopen
-from pathlib import Path
 import xml.etree.ElementTree as et
-from xml.dom import minidom
-import boto3
 
-s3 = boto3.client('s3')
-bucket = 'se-firds'
+bucket = 'aws-sam-cli-managed-default-samclisourcebucket-1t8ceoxs1k7gn'
 
 def lambda_handler(event, context):
     """Sample pure Lambda function
@@ -62,17 +57,10 @@ def lambda_handler(event, context):
         # upadte new url
         url = source_url(query, from_date, to_date)
 
-    # xml = get_firsts_xml_from_url(url)
-
+    # get zips urls 
     zips = get_zips_from_url(url)
 
-    putObjects = []
-
     file_name = ''
-
-    df_cols = ["FinInstrmGnlAttrbts.Id", "FinInstrmGnlAttrbts.FullNm", "FinInstrmGnlAttrbts.ClssfctnTp", "FinInstrmGnlAttrbts.CmmdtyDerivInd", "FinInstrmGnlAttrbts.NtnlCcy", "Issr"]
-
-    df = pd.DataFrame(columns=df_cols)
 
     # for zip in zips:
     zipurl = urlopen(zips[0])
@@ -84,18 +72,10 @@ def lambda_handler(event, context):
                     with open(f'/tmp/{file_name}', "wb") as f:
                         f.write(myfile.read())
                         f.close()
-                    # putFile = s3.put_object(Bucket=bucket, Key=f'DLTINS/{file_name}', Body=myfile.read())
-                    # putObjects.append(putFile)
-                # print(putFile)
 
-    # # Delete zip file after unzip
-    # if len(putObjects) > 0:
-    #     # deletedObj = s3.delete_object(Bucket=bucket, Key=key)
-    #     print('deleted file:')
-    #     print(deletedObj)
-
-
-    # file_data = s3.get_object(Bucket=bucket, Key=file_name).get('Body').read().decode('utf-8');
+    df_cols = ["FinInstrmGnlAttrbts.Id", "FinInstrmGnlAttrbts.FullNm", "FinInstrmGnlAttrbts.ClssfctnTp",
+               "FinInstrmGnlAttrbts.CmmdtyDerivInd", "FinInstrmGnlAttrbts.NtnlCcy", "Issr"]
+    df = pd.DataFrame(columns=df_cols)
 
     total = 0;
     file_path = f'/tmp/{file_name}';
@@ -103,73 +83,13 @@ def lambda_handler(event, context):
         total = total + 1
         df1 = pd.DataFrame(rcrd, columns=df_cols, index=[total])
         df = pd.concat([df, df1])
+        print(total)
+        # for demonstrations purposes only get first 2500 records
         if total > 2500: break
 
     df.to_csv(f's3://{bucket}/out.csv', sep=',', encoding='utf-8')
 
-    # read file from s3
-    # file_data = s3.get_object(Bucket=bucket, Key=file_name).get('Body').read().decode('utf-8');
-
-    # (Bucket = bucket, Prefix='/something/')
-    # obj = s3.Object(Bucket=bucket, Key=fileName)
-    # file_data = obj.get()['Body'].read()
-
-    # #parse xml
-    # xmldoc = minidom.parseString(file_data)
-    # print(xmldoc.toprettyxml())
-    # file_content = s3.get_object(Bucket=bucket, Key=fileName)['Body'].read().decode('utf-8')
-    # print(file_content)
-    # xtree = et.iterparse(file_data)
-    # xroot = xtree.getroot()
-
-    # df_cols = ["FinInstrmGnlAttrbts.Id", "FinInstrmGnlAttrbts.FullNm", "FinInstrmGnlAttrbts.ClssfctnTp", "FinInstrmGnlAttrbts.CmmdtyDerivInd", "FinInstrmGnlAttrbts.NtnlCcy", "Issr"]
-    # rows = []
-
-    # # # for elem in xtree.iter():
-    # # #     print(elem.tag)
-    # namespaces = {
-    #     '': 'urn:iso:std:iso:20022:tech:xsd:auth.036.001.02',
-    # }
-
-    # for elem in xroot.findall('.//FinInstrm', namespaces):
-    #     s_issr = elem.find(".//Issr", namespaces).text if elem is not None else None
-    #     # print(elem.find(".//Issr", namespaces).text)
-
-
-    #     for fin_instrm_el in xroot.findall('.//FinInstrmGnlAttrbts', namespaces):
-
-    #         s_id = fin_instrm_el.find("Id", namespaces).text if fin_instrm_el is not None else None
-    #         s_full_nm = fin_instrm_el.find("FullNm", namespaces).text if fin_instrm_el is not None else None
-    #         s_clssfctn_tp = fin_instrm_el.find("ClssfctnTp", namespaces).text if fin_instrm_el is not None else None
-    #         s_cmmdty_deriv_ind = fin_instrm_el.find("CmmdtyDerivInd", namespaces).text if fin_instrm_el is not None else None
-    #         s_ctnl_ccy = fin_instrm_el.find("NtnlCcy", namespaces).text if fin_instrm_el is not None else None
-
-    #         rows.append({
-    #             "FinInstrmGnlAttrbts.Id": s_id, 
-    #             "FinInstrmGnlAttrbts.FullNm": s_full_nm,
-    #             "FinInstrmGnlAttrbts.ClssfctnTp": s_clssfctn_tp,
-    #             "FinInstrmGnlAttrbts.CmmdtyDerivInd": s_cmmdty_deriv_ind,
-    #             "FinInstrmGnlAttrbts.NtnlCcy": s_ctnl_ccy,
-    #             "Issr": s_issr,
-    #         })
-
-    # out_df = pd.DataFrame(rows, columns = df_cols)
-
-    return response({
-            "message": "hello world",
-            # "query": event["queryStringParameters"].get('q', ''),
-            # "from": from_date,
-            'url': url,
-            "zip": zips[0]
-            # "zips": json(set(df['str'].tolist()))
-            # "xml": xml,
-            # "columns": json(df.columns)
-            # 'parameters': query_parameters
-            # "xml": get_firsts_xml_from_url(url)
-            # "to": event.get("queryStringParameters", {}).get('to', ''),
-            # "event": event
-            # "location": ip.text.replace("\n", "")
-        })
+    return response('OK')
 
 def source_url(query: str = '*', date_from: str = '2021-01-17', date_to: str = '2021-01-19') -> str:
     """Get firds source url

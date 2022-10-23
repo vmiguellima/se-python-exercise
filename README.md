@@ -1,7 +1,14 @@
 # se-test
 Steel eye test excercise
 
-# Create custom python layer
+## What's done:
+- Unit testing
+- Continuos Integration using Github to AWS lamba
+- Get zip and extract xml
+- Parse xml to csv
+- Save dataframe to s3
+
+## Create custom python layer
 
 ```bash
 aws lambda publish-layer-version --layer-name steel-eye-layer --zip-file fileb://layer.zip --compatible-runtimes python3.9 --region us-east-2
